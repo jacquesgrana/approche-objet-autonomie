@@ -21,7 +21,11 @@ public class TestMoyenne {
 		System.out.println("Tab 2 : moyenne : " + moy2.calcul() + "\n");
 		
 		moy2.ajout(20.0d);
-		System.out.println("Tab 2 : moyenne après ajout : " + moy2.calcul() + "\n");
+		System.out.println("Tab 2 : moyenne après 1e ajout : " + moy2.calcul() + "\n");
+		
+		moy2.ajout(0.0d);
+		System.out.println("Tab 2 : moyenne après 2e ajout : " + moy2.calcul() + "\n");
+
 
 	}
 
