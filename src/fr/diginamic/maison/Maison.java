@@ -42,6 +42,26 @@ public class Maison {
 		}
 		return valToReturn;
 	}
+	
+	public double getSuperficieType(String type) {
+		double valToReturn = 0.0d;
+		for(Piece maPiece : this.pieces) {
+			if (maPiece.getType().equals(type)) {
+				valToReturn += maPiece.getSuperficie();	
+			}
+		}
+		return valToReturn;
+	}
+	
+	public int getNombrePieceType(String type) {
+		int cpt = 0;
+		for(Piece maPiece : this.pieces) {
+			if (maPiece.getType().equals(type)) {
+				cpt++;	
+			}
+		}
+		return cpt;
+	}
 
 	public Piece[] getPieces() {
 		return pieces;

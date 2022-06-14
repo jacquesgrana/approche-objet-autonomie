@@ -37,6 +37,9 @@ public class TestMaison {
 		
 		maison.ajouterPiece(null);
 		
+		Chambre fake1 = new Chambre(-15.0d, 0);
+		Chambre fake2 = new Chambre(15.0d, -1);
+		
 		double superfTotal = maison.getSuperficieMaison();
 		System.out.println("Superficie de la maison : " + superfTotal + "\n");
 		
@@ -45,6 +48,15 @@ public class TestMaison {
 		
 		double superfEtage1 = maison.getSuperficieEtage(1);
 		System.out.println("Superficie de l'étage 1 :  " + superfEtage1 + "\n");
+		
+		double superfChambre = maison.getSuperficieType("Chambre");
+		System.out.println("Superficie des chambres :  " + superfChambre + "\n");
+		
+		double superfSdb = maison.getSuperficieType("Salle de Bain");
+		System.out.println("Superficie des sdb :  " + superfSdb + "\n");
+		
+		System.out.println("Nombre de chambres : " + maison.getNombrePieceType("Chambre") + "\n");
+		System.out.println("Nombre de sdb : " + maison.getNombrePieceType("Salle de Bain") + "\n");
 	}
 
 }

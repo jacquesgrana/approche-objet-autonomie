@@ -10,9 +10,17 @@ public abstract class Piece {
 	public Piece(double superficie, int numeroEtage, String type) {
 		//super();
 		// TODO ajouter test pour contrôler, ex numEtag >= 0, superficie > 0
-		this.superficie = superficie;
-		this.numeroEtage = numeroEtage;
-		this.type = type;
+		
+		if((superficie > 0.0) && (numeroEtage >= 0)) {
+			this.superficie = superficie;
+			this.numeroEtage = numeroEtage;
+			this.type = type;
+		}
+		else {
+			System.out.println("Erreur : Données incorrectes\n");
+		}
+		
+		
 	}
 
 
@@ -33,6 +41,16 @@ public abstract class Piece {
 
 	public void setNumeroEtage(int numeroEtage) {
 		this.numeroEtage = numeroEtage;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
