@@ -7,7 +7,7 @@ import fr.diginamic.formes.Rectangle;
 public class TestForme {
 
 	public static void main(String[] args) {
-		Cercle circle = new Cercle(100.0d);
+		Cercle circle = new Cercle(50.0d);
 		Rectangle rectangle = new Rectangle(50.0d, 125.0d);
 		Carre carre = new Carre(100.0d);
 		
