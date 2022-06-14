@@ -4,7 +4,7 @@ public abstract class Intervenant {
 	
 	private String name;
 	private String firstName;
-	private String status; // ajouté car solution la plus simple
+	private String status; // ajouté car solution la plus simple, utiliser enum
 	
 	
 	public Intervenant(String name, String firstName, String status) {
