@@ -6,7 +6,7 @@ public class Pigiste extends Intervenant {
 	private double daySalary;
 	
 	public Pigiste(String name, String firstName, int dayNumber, double daySalary) {
-		super(name, firstName);
+		super(name, firstName, "Pigiste");
 		this.dayNumber = dayNumber;
 		this.daySalary = daySalary;
 	}

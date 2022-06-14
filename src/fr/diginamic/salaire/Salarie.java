@@ -5,8 +5,8 @@ public class Salarie extends Intervenant {
 	private double monthSalary;
 	
 	
-	public Salarie(String name, String firstName, double monthSalary) {
-		super(name, firstName);
+	public Salarie(String name, String firstName,double monthSalary) {
+		super(name, firstName, "Salarié");
 		this.monthSalary = monthSalary;
 	}
 
@@ -15,5 +15,5 @@ public class Salarie extends Intervenant {
 	public double getSalary() {
 		return this.monthSalary;
 	}
-
+	
 }

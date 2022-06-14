@@ -10,8 +10,14 @@ public class TestIntervenant {
 		Salarie salar = new Salarie("Martin", "Martine", 3500.0d);
 		System.out.println("Salarié : salaire : " + salar.getSalary());
 		
-		Pigiste pig = new Pigiste("Dupond", "Jean", 60, 20.0);
-		System.out.println("Pigiste : salaire : " + pig.getSalary());
+		Pigiste pigist = new Pigiste("Dupond", "Jean", 60, 20.0);
+		System.out.println("Pigiste : salaire : " + pigist.getSalary());
+		
+		System.out.println();
+		
+		
+		salar.displayDatas();
+		pigist.displayDatas();
 
 	}
 
