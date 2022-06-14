@@ -38,7 +38,10 @@ public class TestMaison {
 		maison.ajouterPiece(null);
 		
 		Chambre fake1 = new Chambre(-15.0d, 0);
+		maison.ajouterPiece(fake1);
+		
 		Chambre fake2 = new Chambre(15.0d, -1);
+		maison.ajouterPiece(fake2);
 		
 		double superfTotal = maison.getSuperficieMaison();
 		System.out.println("Superficie de la maison : " + superfTotal + "\n");

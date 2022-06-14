@@ -10,7 +10,17 @@ public class Maison {
 	}
 	
 	public void ajouterPiece(Piece pieceToAdd) {
-		if (pieceToAdd != null) {
+		
+		boolean isOk1 = pieceToAdd != null;
+		boolean isOk2 = false;
+		boolean isOk3 = false;
+		
+		if(isOk1) {
+			isOk2 = pieceToAdd.getSuperficie() > 0.0d;
+			isOk3 = pieceToAdd.getNumeroEtage() >= 0;
+		}
+		
+		if (isOk1 && isOk2 && isOk3) {
 			Piece[] tempTab = new Piece[this.pieces.length + 1];
 			for (int i=0; i<this.pieces.length; i++) {
 				tempTab[i] = this.pieces[i];
@@ -19,7 +29,7 @@ public class Maison {
 			this.pieces = tempTab;
 		}
 		else {
-			System.out.println("Ajout impossible, Objet à null !!\n");
+			System.out.println("Ajout impossible, Données incorrectes\n");
 		}
 		
 		

@@ -8,19 +8,9 @@ public abstract class Piece {
 	
 	
 	public Piece(double superficie, int numeroEtage, String type) {
-		//super();
-		// TODO ajouter test pour contrôler, ex numEtag >= 0, superficie > 0
-		
-		if((superficie > 0.0) && (numeroEtage >= 0)) {
-			this.superficie = superficie;
-			this.numeroEtage = numeroEtage;
-			this.type = type;
-		}
-		else {
-			System.out.println("Erreur : Données incorrectes\n");
-		}
-		
-		
+		this.superficie = superficie;
+		this.numeroEtage = numeroEtage;
+		this.type = type;
 	}
 
 
