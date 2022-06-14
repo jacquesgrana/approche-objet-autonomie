@@ -12,8 +12,8 @@ public class Maison {
 	public void ajouterPiece(Piece pieceToAdd) {
 		
 		boolean isOk1 = pieceToAdd != null;
-		boolean isOk2 = false;
-		boolean isOk3 = false;
+		boolean isOk2 = true;
+		boolean isOk3 = true;
 		
 		if(isOk1) {
 			isOk2 = pieceToAdd.getSuperficie() > 0.0d;
@@ -29,7 +29,17 @@ public class Maison {
 			this.pieces = tempTab;
 		}
 		else {
-			System.out.println("Ajout impossible, Données incorrectes\n");
+			String comment = "Ajout refusé, Donnée incorrecte : ";
+			if(!isOk1) {
+				comment += "Objet à 'null' ";
+			}
+			if(!isOk2) {
+				comment += "Superficie négative ou nulle ";
+			}
+			if(!isOk3) {
+				comment += "Etage négatif ";
+			}
+			System.out.println(comment + "\n");
 		}
 		
 		
