@@ -24,8 +24,10 @@ public class RunJdr {
 				break;
 			case 'P':
 			case 'p':
-				player = displayCreationMenuAndCreatePlayer(scanner);
-				persoCreated = true;
+				if (!persoCreated) {
+					player = displayCreationMenuAndCreatePlayer(scanner);
+					persoCreated = true;
+				}
 				break;
 			case 'A':
 			case 'a':
@@ -48,7 +50,7 @@ public class RunJdr {
 		scanner.close();
 	}
 
-	static void displayCombat(Player player, Scanner scanner) {
+	private static void displayCombat(Player player, Scanner scanner) {
 		boolean isCombatOver = false;
 		boolean isCreatureChoosen = false;
 		char choice;
@@ -58,18 +60,7 @@ public class RunJdr {
 		Creature creature = null;
 
 		while (!isCreatureChoosen) {
-			System.out.println("\n\n\n\n");
-			System.out.println("**************************");
-			System.out.println("*                        *");
-			System.out.println("*        COMBAT :        *");
-			System.out.println("*                        *");
-			System.out.println("*  Choisir l'adversaire  *");
-			System.out.println("*                        *");
-			System.out.println("**************************");
-			System.out.println();
-			System.out.println(" Loup : L");
-			System.out.println(" Gobelin : G");
-			System.out.println(" Troll : T");
+			displayCreatureChoice();
 			choice = scanner.next().charAt(0);
 			switch (choice) {
 			case 'L':
@@ -96,22 +87,10 @@ public class RunJdr {
 				System.out.println("\n Créature choisie : " + creature.toString());
 			}
 		}
-
-		System.out.println("\n\n\n\n");
-		System.out.println("**************************");
-		System.out.println("*                        *");
-		System.out.println("*        COMBAT :        *");
-		System.out.println("*                        *");
-		System.out.println("**************************");
-		System.out.println();
-		System.out.println("Adversaire de type : " + creature.getType());
-
+		
+		displayCombatHeader(creature);
 		do {
-			System.out.println();
-			System.out.println("******************************************************************************");
-			System.out.print(" Tour n° : " + turnNumber + " / " + player.getName() + " Pv : " + player.getLife() + " St : " + player.getStrength());
-			System.out.println(" / " + creature.getType() + " Pv : " + creature.getLife() + " St : " + creature.getStrength()); 
-			System.out.println("'C' pour combattre");
+			displayTurnHeader(player, turnNumber, creature);
 
 			do {
 				choice = scanner.next().charAt(0);
@@ -134,7 +113,7 @@ public class RunJdr {
 
 			if (player.getLife() <= 0) {
 				isCombatOver = true;
-				System.out.println(" Combat perdu !! " + creature.getType() + " a gagné !! Votre personnage va être effacé");
+				System.out.println("\n Combat perdu !! " + creature.getType() + " a gagné !! Votre personnage va être effacé");
 				displayInfos(player);
 				player.reset();
 				do {
@@ -145,7 +124,7 @@ public class RunJdr {
 			if (creature.getLife() <= 0) {
 				isCombatOver = true;
 				player.setScore(player.getScore() + creature.getLoot());
-				System.out.println(" Combat gagné !! " + creature.getType() + " a perdu !! Score augmenté de : " + creature.getLoot());
+				System.out.println("\n Combat gagné !! " + creature.getType() + " a perdu !! Score augmenté de : " + creature.getLoot());
 				displayInfos(player);
 				do {
 					choice = scanner.next().charAt(0);
@@ -159,6 +138,38 @@ public class RunJdr {
 
 	}
 
+	public static void displayTurnHeader(Player player, int turnNumber, Creature creature) {
+		System.out.println();
+		System.out.println("******************************************************************************");
+		System.out.print("\n Tour n° : " + turnNumber + " / " + player.getName() + " Pv : " + player.getLife() + " St : " + player.getStrength());
+		System.out.println(" / " + creature.getType() + " Pv : " + creature.getLife() + " St : " + creature.getStrength()); 
+		System.out.println(" 'C' pour combattre");
+	}
+
+	public static void displayCombatHeader(Creature creature) {
+		System.out.println("\n\n\n\n");
+		System.out.println("**************************");
+		System.out.println("*                        *");
+		System.out.println("*        COMBAT :        *");
+		System.out.println("*                        *");
+		System.out.println("**************************");
+		System.out.println();
+		System.out.println(" Adversaire de type : " + creature.getType());
+	}
+
+	private static void displayCreatureChoice() {
+		System.out.println("\n\n\n\n");
+		System.out.println("**************************");
+		System.out.println("*                        *");
+		System.out.println("*  Choisir l'adversaire  *");
+		System.out.println("*                        *");
+		System.out.println("**************************");
+		System.out.println();
+		System.out.println(" Loup : L");
+		System.out.println(" Gobelin : G");
+		System.out.println(" Troll : T");
+	}
+
 	private static void displayInfos(Player player) {
 		System.out.println();
 		System.out.println(" Infos :");
@@ -168,10 +179,10 @@ public class RunJdr {
 		System.out.println(" Vie : " + player.getLife());
 		System.out.println(" Score : " + player.getScore());
 		System.out.println();
-		System.out.println("C pour continuer");
+		System.out.println(" 'C' pour continuer");
 	}
 
-	static void displayPlayerInfos(Player player, Scanner scanner) {
+	private static void displayPlayerInfos(Player player, Scanner scanner) {
 		boolean isContinue = false;
 		char choice;
 		do {
@@ -187,7 +198,7 @@ public class RunJdr {
 			System.out.println(" Force : " + player.getStrength());
 			System.out.println(" Vie : " + player.getLife());
 			System.out.println(" Score : " + player.getScore());
-			System.out.println("\n C : continuer");
+			System.out.println("\n 'C' pour continuer");
 			choice = scanner.next().charAt(0);
 			if ((choice == 'C') || (choice == 'c')) {
 				isContinue = true;
@@ -195,7 +206,7 @@ public class RunJdr {
 		} while (!isContinue);
 	}
 
-	static Player displayCreationMenuAndCreatePlayer(Scanner scanner) {
+	private static Player displayCreationMenuAndCreatePlayer(Scanner scanner) {
 		boolean nameOk = false;
 		boolean isContinue = false;
 		char choice;
@@ -224,9 +235,9 @@ public class RunJdr {
 
 		Player player = new Player(playerName);
 
-		System.out.println("\n > Joueur crée : " + player.toString() + "\n");
+		System.out.println("\n Joueur crée : " + player.toString() + "\n");
 		do {
-			System.out.println(" C : continuer");
+			System.out.println(" 'C' pour continuer");
 			choice = scanner.next().charAt(0);
 			if ((choice == 'C') || (choice == 'c')) {
 				isContinue = true;
@@ -236,7 +247,7 @@ public class RunJdr {
 		return player;
 	}
 
-	static void displayGeneralMenu(Player player) {
+	private static void displayGeneralMenu(Player player) {
 		boolean isPlayerExists = player.getName() != "";
 		System.out.println("\n\n\n\n");
 		System.out.println("**************************");
@@ -245,7 +256,10 @@ public class RunJdr {
 		System.out.println("*                        *");
 		System.out.println("**************************");
 		System.out.println("*                        *");
-		System.out.println("*  P : créer Personnage  *");
+		if (!isPlayerExists) {
+			System.out.println("*  P : créer Personnage  *");
+		}
+		
 		if (isPlayerExists) {
 			System.out.println("*  C : Combattre         *");
 			System.out.println("*  A : Afficher infos    *");
