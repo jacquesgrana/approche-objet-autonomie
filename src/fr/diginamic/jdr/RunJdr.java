@@ -109,17 +109,20 @@ public class RunJdr {
 			// calcul des attaques respectives pour ce tour
 			playerAttack = (int) (player.getStrength() + Math.round(10 * Math.random()));
 			creatureAttack = (int) (creature.getStrength() + Math.round(10 * Math.random()));
-			int diffAttack = 0;
-
-			// si le joueur gagne le tour
-			if (playerAttack >= creatureAttack) {
-				diffAttack = playerAttack - creatureAttack;
+			int diffAttack = Math.abs(playerAttack - creatureAttack);
+			// si personne ne gagne le tour
+			if(diffAttack == 0) {
+				System.out.println(" Tour gagné par personne !! Pas de modifications");
+			}
+			// si le joueur gagne le tour	
+			else if (playerAttack >= creatureAttack) {
+				//diffAttack = playerAttack - creatureAttack;
 				creature.setLife(creature.getLife() - diffAttack);
 				System.out.println(" Tour gagné par " + player.getName() + " / " + creature.getType() + " perd " + diffAttack + " Pv");
 			} 
 			// sinon la créature gagne le tour
 			else {
-				diffAttack = creatureAttack - playerAttack;
+				//diffAttack = creatureAttack - playerAttack;
 				player.setLife(player.getLife() - diffAttack);
 				System.out.println(" Tour gagné par " + creature.getType() + " / " + player.getName() + " perd " + diffAttack + " Pv");
 			}
