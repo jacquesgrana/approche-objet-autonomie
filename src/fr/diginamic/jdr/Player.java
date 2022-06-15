@@ -22,6 +22,20 @@ public class Player {
 		this.life = (int) (20 + Math.round(30 * Math.random()));
 		this.score = 0;
 	}
+	
+	public Player() {
+		this.name = "";
+		this.strength = 0;
+		this.life = 0;
+		this.score = 0;
+	}
+	
+	public void reset() {
+		this.name = "";
+		this.strength = 0;
+		this.life = 0;
+		this.score = 0;
+	}
 
 	public String getName() {
 		return name;

@@ -9,7 +9,7 @@ public class RunJdr {
 		Scanner scanner = new Scanner(System.in);
 		boolean quit = false;
 		boolean persoCreated = false;
-		Player player = null;
+		Player player = new Player();
 		char choice;
 		
 		do {
@@ -158,9 +158,9 @@ public class RunJdr {
 				if (player.getLife() <= 0) {
 					isPlayerLose = true;
 					isCombatOver = true;
-					// affiche infos joueur attend c pour continuer
+					// affiche infos joueur
 					
-					player = null;
+					player.reset(); // ************************************************ player = new Player();
 					System.out.println(" Combat perdu !! " + creature.getType() + " a gagné !! Votre personnage va être effacé");
 					System.out.println("C pour continuer");
 					do {
@@ -173,7 +173,7 @@ public class RunJdr {
 					isCombatOver = true;
 					// calculer score
 					player.setScore(player.getScore() + creature.getLoot());
-					// affiche infos joueur attend c pour continuer
+					// affiche infos joueur
 					System.out.println(" Combat gagné !! " + creature.getType() + " a perdu !! Score augmenté de : " + creature.getLoot());
 					System.out.println("C pour continuer");
 					do {

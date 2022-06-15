@@ -21,7 +21,7 @@ public class Creature {
 			this.loot = 2;
 			break;
 		case "Troll" :
-			this.strength = (int) (10 + Math.round(5 * Math.random()));
+			this.strength = (int) (30 + Math.round(5 * Math.random()));
 			this.life = (int) (20 + Math.round(10 * Math.random()));
 			this.loot = 5;
 			break;
