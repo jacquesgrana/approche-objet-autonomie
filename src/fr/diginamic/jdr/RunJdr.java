@@ -42,7 +42,8 @@ public class RunJdr {
 				break;
 			}
 
-		} while (!quit);
+		} 
+		while (!quit);
 		System.out.println("\nFin du programme.");
 		scanner.close();
 	}
@@ -56,7 +57,7 @@ public class RunJdr {
 		int creatureAttack = 0;
 		Creature creature = null;
 
-		if (!isCreatureChoosen) {
+		while (!isCreatureChoosen) {
 			System.out.println("\n\n\n\n");
 			System.out.println("**************************");
 			System.out.println("*                        *");
@@ -86,7 +87,11 @@ public class RunJdr {
 				creature = new Creature("Troll");
 				isCreatureChoosen = true;
 				break;
+			default :
+				isCreatureChoosen = false;
+				break;
 			}
+			
 			if (isCreatureChoosen) {
 				System.out.println("\n Créature choisie : " + creature.toString());
 			}
@@ -112,63 +117,58 @@ public class RunJdr {
 				choice = scanner.next().charAt(0);
 			} while ((choice != 'C') && (choice != 'c'));
 
-			// calcule attaques des deux
 			playerAttack = (int) (player.getStrength() + Math.round(10 * Math.random()));
 			creatureAttack = (int) (creature.getStrength() + Math.round(10 * Math.random()));
 			int diffAttack = 0;
-			// determine qui gagne le tour
+
 			if (playerAttack >= creatureAttack) {
 				diffAttack = playerAttack - creatureAttack;
 				creature.setLife(creature.getLife() - diffAttack);
-				System.out.println("Tour gagné par " + player.getName() + " / " + creature.getType() + " perd " + diffAttack + " Pv");
-			} else {
+				System.out.println(" Tour gagné par " + player.getName() + " / " + creature.getType() + " perd " + diffAttack + " Pv");
+			} 
+			else {
 				diffAttack = creatureAttack - playerAttack;
 				player.setLife(player.getLife() - diffAttack);
-				System.out.println("Tour gagné par " + creature.getType() + " / " + player.getName() + " perd " + diffAttack + " Pv");
+				System.out.println(" Tour gagné par " + creature.getType() + " / " + player.getName() + " perd " + diffAttack + " Pv");
 			}
 
 			if (player.getLife() <= 0) {
 				isCombatOver = true;
 				System.out.println(" Combat perdu !! " + creature.getType() + " a gagné !! Votre personnage va être effacé");
-				// TODO affiche infos joueur faire fonction
-				System.out.println();
-				System.out.println(" Infos :");
-				System.out.println();
-				System.out.println(" Nom : " + player.getName());
-				System.out.println(" Force : " + player.getStrength());
-				System.out.println(" Vie : " + player.getLife());
-				System.out.println(" Score : " + player.getScore());
-				System.out.println();
-				System.out.println("C pour continuer");
+				displayInfos(player);
 				player.reset();
 				do {
 					choice = scanner.next().charAt(0);
-				} while ((choice != 'C') && (choice != 'c'));
+				} 
+				while ((choice != 'C') && (choice != 'c'));
 			}
 			if (creature.getLife() <= 0) {
 				isCombatOver = true;
 				player.setScore(player.getScore() + creature.getLoot());
-				
 				System.out.println(" Combat gagné !! " + creature.getType() + " a perdu !! Score augmenté de : " + creature.getLoot());
-				// TODO affiche infos joueur faire fonction
-				System.out.println();
-				System.out.println(" Infos :");
-				System.out.println();
-				System.out.println(" Nom : " + player.getName());
-				System.out.println(" Force : " + player.getStrength());
-				System.out.println(" Vie : " + player.getLife());
-				System.out.println(" Score : " + player.getScore());
-				System.out.println();
-				System.out.println("C pour continuer");
+				displayInfos(player);
 				do {
 					choice = scanner.next().charAt(0);
-				} while ((choice != 'C') && (choice != 'c'));
+				} 
+				while ((choice != 'C') && (choice != 'c'));
 			}
 
 			turnNumber++;
 		} 
 		while (!isCombatOver);
 
+	}
+
+	private static void displayInfos(Player player) {
+		System.out.println();
+		System.out.println(" Infos :");
+		System.out.println();
+		System.out.println(" Nom : " + player.getName());
+		System.out.println(" Force : " + player.getStrength());
+		System.out.println(" Vie : " + player.getLife());
+		System.out.println(" Score : " + player.getScore());
+		System.out.println();
+		System.out.println("C pour continuer");
 	}
 
 	static void displayPlayerInfos(Player player, Scanner scanner) {
