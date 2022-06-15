@@ -11,7 +11,8 @@ public class RunJdr {
 		Player player = new Player();
 		boolean persoCreated = false;
 		char choice;
-
+		
+		// affiche le menu et attend qu'une valeur correcte soit saisie Q P A ou C
 		do {
 			persoCreated = player.getName() != "";
 			displayGeneralMenu(player);
@@ -39,7 +40,7 @@ public class RunJdr {
 			case 'C':
 			case 'c':
 				if (persoCreated) {
-					displayCombat(player, scanner);
+					displayAndRunCombat(player, scanner);
 				}
 				break;
 			}
@@ -50,7 +51,13 @@ public class RunJdr {
 		scanner.close();
 	}
 
-	private static void displayCombat(Player player, Scanner scanner) {
+	/**
+	 * Affiche l'écran des combats, fait choisir la créature à combattre et execute le combat pas par pas
+	 * 
+	 * @param player joueur en cours de combat
+	 * @param scanner pour les saisies claviers
+	 */
+	private static void displayAndRunCombat(Player player, Scanner scanner) {
 		boolean isCombatOver = false;
 		boolean isCreatureChoosen = false;
 		char choice;
@@ -59,6 +66,7 @@ public class RunJdr {
 		int creatureAttack = 0;
 		Creature creature = null;
 
+		// choix de la créature à combattre
 		while (!isCreatureChoosen) {
 			displayCreatureChoice();
 			choice = scanner.next().charAt(0);
@@ -88,6 +96,7 @@ public class RunJdr {
 			}
 		}
 		
+		// exécution du combat
 		displayCombatHeader(creature);
 		do {
 			displayTurnHeader(player, turnNumber, creature);
@@ -96,21 +105,25 @@ public class RunJdr {
 				choice = scanner.next().charAt(0);
 			} while ((choice != 'C') && (choice != 'c'));
 
+			// calcul des attaques respectives pour ce tour
 			playerAttack = (int) (player.getStrength() + Math.round(10 * Math.random()));
 			creatureAttack = (int) (creature.getStrength() + Math.round(10 * Math.random()));
 			int diffAttack = 0;
 
+			// si le joueur gagne le tour
 			if (playerAttack >= creatureAttack) {
 				diffAttack = playerAttack - creatureAttack;
 				creature.setLife(creature.getLife() - diffAttack);
 				System.out.println(" Tour gagné par " + player.getName() + " / " + creature.getType() + " perd " + diffAttack + " Pv");
 			} 
+			// sinon la créature gagne le tour
 			else {
 				diffAttack = creatureAttack - playerAttack;
 				player.setLife(player.getLife() - diffAttack);
 				System.out.println(" Tour gagné par " + creature.getType() + " / " + player.getName() + " perd " + diffAttack + " Pv");
 			}
 
+			// si le joueur est mort
 			if (player.getLife() <= 0) {
 				isCombatOver = true;
 				System.out.println("\n Combat perdu !! " + creature.getType() + " a gagné !! Votre personnage va être effacé");
@@ -121,6 +134,7 @@ public class RunJdr {
 				} 
 				while ((choice != 'C') && (choice != 'c'));
 			}
+			// si la créature est morte
 			if (creature.getLife() <= 0) {
 				isCombatOver = true;
 				player.setScore(player.getScore() + creature.getLoot());
@@ -138,6 +152,13 @@ public class RunJdr {
 
 	}
 
+	/**
+	 * Affiche le haut de l'affichage d'un tour de combat
+	 * 
+	 * @param player joueur en cours de combat
+	 * @param turnNumber numéro du tour de combat
+	 * @param creature créature en cours de combat
+	 */
 	public static void displayTurnHeader(Player player, int turnNumber, Creature creature) {
 		System.out.println();
 		System.out.println("******************************************************************************");
@@ -146,6 +167,11 @@ public class RunJdr {
 		System.out.println(" 'C' pour combattre");
 	}
 
+	/**
+	 * Affiche le haut de l'écran des combats
+	 * 
+	 * @param creature  créature en cours de combat
+	 */
 	public static void displayCombatHeader(Creature creature) {
 		System.out.println("\n\n\n\n");
 		System.out.println("**************************");
@@ -157,6 +183,9 @@ public class RunJdr {
 		System.out.println(" Adversaire de type : " + creature.getType());
 	}
 
+	/**
+	 * Affiche le choix des créatures à combattre
+	 */
 	private static void displayCreatureChoice() {
 		System.out.println("\n\n\n\n");
 		System.out.println("**************************");
@@ -170,6 +199,11 @@ public class RunJdr {
 		System.out.println(" Troll : T");
 	}
 
+	/**
+	 * Affiche les infos du joueur en fin de combat
+	 * 
+	 * @param player joueur en cours de combat
+	 */
 	private static void displayInfos(Player player) {
 		System.out.println();
 		System.out.println(" Infos :");
@@ -182,6 +216,12 @@ public class RunJdr {
 		System.out.println(" 'C' pour continuer");
 	}
 
+	/**
+	 * Affiche l'écran des informations du joueur depuis le menu principal
+	 * 
+	 * @param player joueur en cours
+	 * @param scanner pour les saisies claviers
+	 */
 	private static void displayPlayerInfos(Player player, Scanner scanner) {
 		boolean isContinue = false;
 		char choice;
@@ -206,6 +246,12 @@ public class RunJdr {
 		} while (!isContinue);
 	}
 
+	/**
+	 * Affiche le menu de création du joueur, fabrique et retourne l'objet Player créé à partir du nom choisi
+	 * 
+	 * @param scanner pour les saisies claviers
+	 * @return Player nouveau joueur créé à partir du nom choisi
+	 */
 	private static Player displayCreationMenuAndCreatePlayer(Scanner scanner) {
 		boolean nameOk = false;
 		boolean isContinue = false;
@@ -213,14 +259,7 @@ public class RunJdr {
 		String playerName;
 
 		do {
-			System.out.println("\n\n\n\n");
-			System.out.println("**************************");
-			System.out.println("*                        *");
-			System.out.println("*      CREATION DU       *");
-			System.out.println("*      PERSONNAGE :      *");
-			System.out.println("*                        *");
-			System.out.println("**************************");
-			System.out.println("\n Saisir le nom : ");
+			displayCreationPlayerHeader();
 			playerName = scanner.next();
 			
 			if (playerName != "") {
@@ -247,6 +286,25 @@ public class RunJdr {
 		return player;
 	}
 
+	/**
+	 * Affiche le haut de l'écran de création du joueur
+	 */
+	private static void displayCreationPlayerHeader() {
+		System.out.println("\n\n\n\n");
+		System.out.println("**************************");
+		System.out.println("*                        *");
+		System.out.println("*      CREATION DU       *");
+		System.out.println("*      PERSONNAGE :      *");
+		System.out.println("*                        *");
+		System.out.println("**************************");
+		System.out.println("\n Saisir le nom : ");
+	}
+
+	/**
+	 * Affiche le menu général selon si le joueur a été créé ou non
+	 * 
+	 * @param player
+	 */
 	private static void displayGeneralMenu(Player player) {
 		boolean isPlayerExists = player.getName() != "";
 		System.out.println("\n\n\n\n");

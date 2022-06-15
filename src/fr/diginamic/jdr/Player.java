@@ -1,5 +1,15 @@
 package fr.diginamic.jdr;
 
+/**
+ * Classe représentant un personnage du jeu
+ * 
+ * name : nom du personnage
+ * strength : force du personnage
+ * life : points de vie du personnage
+ * score : score accumulé au cours du jeu
+ * 
+ * @author jacques
+ */
 public class Player {
 	
 	private String name;
@@ -7,15 +17,10 @@ public class Player {
 	private int life;
 	private int score;
 	
-	/*
-	public Player(String name, int strength, int life, int score) {
-		this.name = name;
-		this.strength = strength;
-		this.life = life;
-		this.score = score;
-	}
-	*/
-	
+	/**
+	 * Constructeur "automatique" à partir du nom du personnage choisi, construit de manière aléatoire l'objet
+	 * @param name nom choisi par l'utilisateur
+	 */
 	public Player(String name) {
 		this.name = name;
 		this.strength = (int) (12 + Math.round(6 * Math.random()));
@@ -23,6 +28,9 @@ public class Player {
 		this.score = 0;
 	}
 	
+	/**
+	 * Construit un objet à zéro
+	 */
 	public Player() {
 		this.name = "";
 		this.strength = 0;
@@ -30,6 +38,9 @@ public class Player {
 		this.score = 0;
 	}
 	
+	/**
+	 * Raz de l'objet
+	 */
 	public void reset() {
 		this.name = "";
 		this.strength = 0;

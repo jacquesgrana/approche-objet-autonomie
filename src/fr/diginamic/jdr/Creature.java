@@ -1,5 +1,15 @@
 package fr.diginamic.jdr;
 
+/**
+ * Classe représentant une créature à combattre
+ * 
+ * type : type de la créature, "Wolf" "Gobelin" ou "Troll"
+ * strength : force de la créature
+ * life : points de vis de la créature
+ * loot : récompense quand la créature est tuée
+ * 
+ * @author jacques
+ */
 public class Creature {
 	
 	private String type;
@@ -7,6 +17,12 @@ public class Creature {
 	private int life;
 	private int loot;
 	
+	/**
+	 * Constructeur "automatique" selon le type choisi
+	 * construit aléatoirement 3 types de créature : Wolf, Gobelin ou Troll
+	 * 
+	 * @param type
+	 */
 	public Creature(String type) {
 		this.type = type;
 		switch (type) {
