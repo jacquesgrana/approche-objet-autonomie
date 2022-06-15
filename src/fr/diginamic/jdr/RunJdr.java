@@ -24,7 +24,7 @@ public class RunJdr {
 				break;
 			case 'P':
 			case 'p':
-				player = displayPlayerCreationMenu(scanner); // TODO changer nom
+				player = displayCreationMenuAndCreatePlayer(scanner);
 				persoCreated = true;
 				break;
 			case 'A':
@@ -45,7 +45,6 @@ public class RunJdr {
 		} while (!quit);
 		System.out.println("\nFin du programme.");
 		scanner.close();
-
 	}
 
 	static void displayCombat(Player player, Scanner scanner) {
@@ -105,10 +104,8 @@ public class RunJdr {
 		do {
 			System.out.println();
 			System.out.println("******************************************************************************");
-			System.out.print(" Tour n° : " + turnNumber + " / " + player.getName() + " Pv : " + player.getLife()
-					+ " St : " + player.getStrength());
-			System.out.println(
-					" / " + creature.getType() + " Pv : " + creature.getLife() + " St : " + creature.getStrength()); 
+			System.out.print(" Tour n° : " + turnNumber + " / " + player.getName() + " Pv : " + player.getLife() + " St : " + player.getStrength());
+			System.out.println(" / " + creature.getType() + " Pv : " + creature.getLife() + " St : " + creature.getStrength()); 
 			System.out.println("'C' pour combattre");
 
 			do {
@@ -123,36 +120,45 @@ public class RunJdr {
 			if (playerAttack >= creatureAttack) {
 				diffAttack = playerAttack - creatureAttack;
 				creature.setLife(creature.getLife() - diffAttack);
-				System.out.println("Tour gagné par " + player.getName() + " / " + creature.getType() + " perd "
-						+ diffAttack + " Pv");
+				System.out.println("Tour gagné par " + player.getName() + " / " + creature.getType() + " perd " + diffAttack + " Pv");
 			} else {
 				diffAttack = creatureAttack - playerAttack;
 				player.setLife(player.getLife() - diffAttack);
-				System.out.println("Tour gagné par " + creature.getType() + " / " + player.getName() + " perd "
-						+ diffAttack + " Pv");
+				System.out.println("Tour gagné par " + creature.getType() + " / " + player.getName() + " perd " + diffAttack + " Pv");
 			}
 
 			if (player.getLife() <= 0) {
-				// isPlayerLose = true;
 				isCombatOver = true;
-				// TODO affiche infos joueur
-
-				player.reset();
-				System.out.println(
-						" Combat perdu !! " + creature.getType() + " a gagné !! Votre personnage va être effacé");
+				System.out.println(" Combat perdu !! " + creature.getType() + " a gagné !! Votre personnage va être effacé");
+				// TODO affiche infos joueur faire fonction
+				System.out.println();
+				System.out.println(" Infos :");
+				System.out.println();
+				System.out.println(" Nom : " + player.getName());
+				System.out.println(" Force : " + player.getStrength());
+				System.out.println(" Vie : " + player.getLife());
+				System.out.println(" Score : " + player.getScore());
+				System.out.println();
 				System.out.println("C pour continuer");
+				player.reset();
 				do {
 					choice = scanner.next().charAt(0);
 				} while ((choice != 'C') && (choice != 'c'));
 			}
 			if (creature.getLife() <= 0) {
-				// isPlayerWin = true;
 				isCombatOver = true;
-				// calculer score
 				player.setScore(player.getScore() + creature.getLoot());
-				// TODO affiche infos joueur
-				System.out.println(" Combat gagné !! " + creature.getType() + " a perdu !! Score augmenté de : "
-						+ creature.getLoot());
+				
+				System.out.println(" Combat gagné !! " + creature.getType() + " a perdu !! Score augmenté de : " + creature.getLoot());
+				// TODO affiche infos joueur faire fonction
+				System.out.println();
+				System.out.println(" Infos :");
+				System.out.println();
+				System.out.println(" Nom : " + player.getName());
+				System.out.println(" Force : " + player.getStrength());
+				System.out.println(" Vie : " + player.getLife());
+				System.out.println(" Score : " + player.getScore());
+				System.out.println();
 				System.out.println("C pour continuer");
 				do {
 					choice = scanner.next().charAt(0);
@@ -160,7 +166,8 @@ public class RunJdr {
 			}
 
 			turnNumber++;
-		} while (!isCombatOver);
+		} 
+		while (!isCombatOver);
 
 	}
 
@@ -188,7 +195,7 @@ public class RunJdr {
 		} while (!isContinue);
 	}
 
-	static Player displayPlayerCreationMenu(Scanner scanner) {
+	static Player displayCreationMenuAndCreatePlayer(Scanner scanner) {
 		boolean nameOk = false;
 		boolean isContinue = false;
 		char choice;
@@ -204,9 +211,16 @@ public class RunJdr {
 			System.out.println("**************************");
 			System.out.println("\n Saisir le nom : ");
 			playerName = scanner.next();
-			nameOk = true;
-			// TODO enlever do while? ou tester/valider le nom du joueur?
-		} while (!nameOk);
+			
+			if (playerName != "") {
+				nameOk = true;
+			}
+			else {
+				nameOk = false;
+			}
+			
+		} 
+		while (!nameOk);
 
 		Player player = new Player(playerName);
 
@@ -217,9 +231,8 @@ public class RunJdr {
 			if ((choice == 'C') || (choice == 'c')) {
 				isContinue = true;
 			}
-		} while (!isContinue);
-
-		// System.out.println("Joueur crée : " + player.toString());
+		} 
+		while (!isContinue);
 		return player;
 	}
 
