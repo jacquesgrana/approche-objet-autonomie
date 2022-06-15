@@ -2,6 +2,12 @@ package fr.diginamic.jdr;
 
 import java.util.Scanner;
 
+
+/**
+ * TP J3&J4 Exercie facultatif "Exercice JeuDeRole"
+ * 
+ * @author jacques granarolo
+ */
 public class RunJdr {
 
 	public static void main(String[] args) {
@@ -110,7 +116,8 @@ public class RunJdr {
 			playerAttack = (int) (player.getStrength() + Math.round(10 * Math.random()));
 			creatureAttack = (int) (creature.getStrength() + Math.round(10 * Math.random()));
 			int diffAttack = Math.abs(playerAttack - creatureAttack);
-			// si personne ne gagne le tour
+			
+			// si personne gagne le tour
 			if(diffAttack == 0) {
 				System.out.println(" Tour gagné par personne !! Pas de modifications");
 			}

@@ -1,14 +1,14 @@
 package fr.diginamic.jdr;
 
 /**
- * Classe représentant une créature à combattre
+ * Classe représentant une créature à combattre, 
  * 
- * type : type de la créature, "Wolf" "Gobelin" ou "Troll"
- * strength : force de la créature
- * life : points de vis de la créature
- * loot : récompense quand la créature est tuée
+ * type : type de la créature, "Wolf" "Gobelin" ou "Troll", 
+ * strength : force de la créature, 
+ * life : points de vis de la créature, 
+ * loot : récompense quand la créature est tuée, 
  * 
- * @author jacques
+ * @author jacques granarolo
  */
 public class Creature {
 	

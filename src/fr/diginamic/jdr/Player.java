@@ -1,14 +1,14 @@
 package fr.diginamic.jdr;
 
 /**
- * Classe représentant un personnage du jeu
+ * Classe représentant un personnage du jeu, 
  * 
- * name : nom du personnage
- * strength : force du personnage
- * life : points de vie du personnage
- * score : score accumulé au cours du jeu
+ * name : nom du personnage, 
+ * strength : force du personnage, 
+ * life : points de vie du personnage, 
+ * score : score accumulé au cours du jeu.
  * 
- * @author jacques
+ * @author jacques granarolo
  */
 public class Player {
 	
