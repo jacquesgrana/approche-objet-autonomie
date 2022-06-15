@@ -12,7 +12,7 @@ public class RunJdr {
 		boolean persoCreated = false;
 		char choice;
 		
-		// affiche le menu et attend qu'une valeur correcte soit saisie Q P A ou C
+		// affiche le menu principal et attend qu'une valeur correcte soit saisie : Q P A ou C
 		do {
 			persoCreated = player.getName() != "";
 			displayGeneralMenu(player);
@@ -52,10 +52,11 @@ public class RunJdr {
 	}
 
 	/**
-	 * Affiche l'écran des combats, fait choisir la créature à combattre et execute le combat pas par pas
+	 * Affiche l'écran des combats, fait choisir la créature à combattre et exécute le combat tour par tour
 	 * 
 	 * @param player joueur en cours de combat
 	 * @param scanner pour les saisies claviers
+	 * @see Player
 	 */
 	private static void displayAndRunCombat(Player player, Scanner scanner) {
 		boolean isCombatOver = false;
@@ -158,6 +159,8 @@ public class RunJdr {
 	 * @param player joueur en cours de combat
 	 * @param turnNumber numéro du tour de combat
 	 * @param creature créature en cours de combat
+	 * @see Player
+	 * @see Creature
 	 */
 	public static void displayTurnHeader(Player player, int turnNumber, Creature creature) {
 		System.out.println();
@@ -171,6 +174,7 @@ public class RunJdr {
 	 * Affiche le haut de l'écran des combats
 	 * 
 	 * @param creature  créature en cours de combat
+	 * @see Creature
 	 */
 	public static void displayCombatHeader(Creature creature) {
 		System.out.println("\n\n\n\n");
@@ -203,6 +207,7 @@ public class RunJdr {
 	 * Affiche les infos du joueur en fin de combat
 	 * 
 	 * @param player joueur en cours de combat
+	 * @see Player
 	 */
 	private static void displayInfos(Player player) {
 		System.out.println();
@@ -221,6 +226,7 @@ public class RunJdr {
 	 * 
 	 * @param player joueur en cours
 	 * @param scanner pour les saisies claviers
+	 * @see Player
 	 */
 	private static void displayPlayerInfos(Player player, Scanner scanner) {
 		boolean isContinue = false;
@@ -251,6 +257,7 @@ public class RunJdr {
 	 * 
 	 * @param scanner pour les saisies claviers
 	 * @return Player nouveau joueur créé à partir du nom choisi
+	 * @see Player
 	 */
 	private static Player displayCreationMenuAndCreatePlayer(Scanner scanner) {
 		boolean nameOk = false;
@@ -303,7 +310,8 @@ public class RunJdr {
 	/**
 	 * Affiche le menu général selon si le joueur a été créé ou non
 	 * 
-	 * @param player
+	 * @param player joueur en cours
+	 * @see Player
 	 */
 	private static void displayGeneralMenu(Player player) {
 		boolean isPlayerExists = player.getName() != "";
